@@ -1,0 +1,152 @@
+//
+//  PrefixHeader.pch
+//  BulletAnalyzer
+//
+//  Created by Zj on 17/6/3.
+//  Copyright © 2017年 Zj. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+//头文件
+#import "BATool.h"
+#import "BAHttpTool.h"
+#import "UIImageView+WebCache.h"
+#import "UIBarButtonItem+ZJExtension.h"
+#import "UIView+ZJExtension.h"
+#import "NSObject+ZJUIExtension.h"
+#import "BANavigationViewController.h"
+
+//判断是否为4inch 
+#define Screen40inch ([UIScreen mainScreen].bounds.size.height == 568)
+//判断是否为4.7inch
+#define Screen47inch ([UIScreen mainScreen].bounds.size.height == 667)
+//判断是否为5.5inch
+#define Screen55inch ([UIScreen mainScreen].bounds.size.height == 736)
+//判断是否为5.8inch
+#define Screen58inch ([UIScreen mainScreen].bounds.size.height == 812)
+
+//弧度转角度
+#define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
+//角度转弧度
+#define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
+
+//尺寸
+#define BAScreenHeight [UIScreen mainScreen].bounds.size.height//屏幕高度
+#define BAScreenWidth [UIScreen mainScreen].bounds.size.width//屏幕宽度
+#define BAPadding 10 //间隔
+#define BARadius 6 //圆角
+
+#define BARoomListViewWidth 180
+#define BARoomListViewHeight 120
+#define BARoomListScreenShotImgWidth 160
+#define BARoomListScreenShotImgHeight 90
+#define BAReportGurdientHeight (BAScreenHeight * 0.6)
+#define BAReportCountChartWidth (BAScreenWidth - 8 * BAPadding)
+#define BAReportCountChartHeight (BAScreenHeight / 3)
+#define BAReportWordsChartWidth BAReportCountChartWidth
+#define BAReportWordsChartHeight (BAReportCountChartHeight - 40)
+#define BAReportFansChartPartWidth (BAReportCountChartWidth - 2 * BAPadding)
+#define BAReportFansChartPartHeight (BAReportWordsChartHeight / 3)
+#define BAReportCellHeight (Screen58inch ? (BAScreenHeight * 2.8 / 5) : (BAScreenHeight * 3.0 / 5))
+#define BAReportCellWidth (BAScreenWidth - 8 * BAPadding)
+#define BABulletListCellHeight 80
+#define BABulletSettingHeight 90
+#define BABulletMenuHeight 49
+#define BASentenceViewHeight 220
+#define BABulletActiveCellHeight (BAScreenHeight - 2 * BAPadding) / 10
+#define BAFansReportDrawViewWidth (BAScreenWidth - 100 - 5 * BAPadding)
+#define BAFansReportDrawViewHeight (130 - 4 * BAPadding)
+
+//颜色
+#define BAColor(R, G, B) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1]//自定义颜色
+#define BARandomColor BAColor(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255)) //随机色
+#define BAWhiteColor [UIColor whiteColor] //白色
+#define BABlackColor [UIColor blackColor] //黑色
+#define BABackgroundColor BAColor(240, 243, 246)//背景颜色
+#define BAThemeColor BAColor(249, 118, 143) //常用的主色
+#define BAGurdientPinkColor BAColor(255, 129, 227) //渐变粉主色
+#define BAGurdientBlueColor BAColor(99, 91, 255) //渐变蓝主色
+#define BACommonTextColor BAColor(51, 51, 51) //一般文字颜色
+#define BALightTextColor BAColor(153, 153, 153) //浅说明性文字
+#define BADisabledColor BAColor(204, 204, 204) //不可选颜色
+#define BARoomNameColor BAColor(128, 128, 128) //主页房间名颜色
+#define BARoomInfoColor BAColor(115, 115, 115) //主页房间信息颜色
+#define BASpratorColor BAColor(240, 240, 240) //分隔线颜色
+#define BABulletCellColor BAColor(55, 55, 55) //弹幕背景色
+#define BALineColor1 BAColor(240, 196, 70) //弹幕数量曲线颜色
+#define BALineColor2 BAColor(240, 187, 144) //在线人数曲线颜色
+#define BALineColor3 BAColor(140, 203, 172) //关注增长曲线颜色
+#define BALineColor4 BAColor(254, 160, 183)  //等级分布曲线颜色
+
+//字体
+#define BAThinFont(size) [UIFont systemFontOfSize:size weight:UIFontWeightUltraLight]
+#define BACommonFont(size) [UIFont systemFontOfSize:size weight:UIFontWeightThin]
+#define BABlodFont(size) [UIFont systemFontOfSize:size weight:UIFontWeightBold]
+
+#define BACommonTextFontSize 14
+#define BALargeTextFontSize 20
+#define BASmallTextFontSize 12
+
+//通知
+static NSString *const BANotificationRoomListCellClicked = @"BANotificationRoomListCellClicked";
+static NSString *const BAUserInfoKeyRoomListCellClicked = @"RoomModel";
+static NSString *const BANotificationMainCellOpenBtnClicked = @"BANotificationMainCellOpenBtnClicked";
+static NSString *const BAUserInfoKeyMainCellOpenBtnClicked = @"ReportModel";
+static NSString *const BAUserInfoKeyMainCellOpenBtnFrame = @"OpenBtnFrame";
+static NSString *const BANotificationMainCellReportDelBtnClicked = @"BANotificationMainCellReportDelBtnClicked";
+static NSString *const BAUserInfoKeyMainCellReportDelBtnClicked = @"ReportModel";
+static NSString *const BANotificationMainCellHistoryDelBtnClicked = @"BANotificationMainCellHistoryDelBtnClicked";
+static NSString *const BANotificationBullet = @"BANotificationBullet";
+static NSString *const BAUserInfoKeyBullet = @"Bullet";
+static NSString *const BANotificationGift = @"BANotificationGift";
+static NSString *const BAUserInfoKeyGift = @"Gift";
+static NSString *const BANotificationBeginAnalyzing = @"BANotificationBeginAnalyzing";
+static NSString *const BANotificationEndAnalyzing = @"BANotificationEndAnalyzing";
+static NSString *const BANotificationInterrupAnalyzing = @"BANotificationInterrupAnalyzing";
+static NSString *const BAUserInfoKeyReportModel = @"ReportModel";
+static NSString *const BANotificationDataUpdateComplete = @"BANotificationDataUpdateComplete";
+static NSString *const BAUserInfoKeyReportModelArray = @"ReportModelArray";
+static NSString *const BAUserInfoKeySearchHistoryArray = @"SearchHistoryArray";
+
+//url
+static NSString *const BADouyuImgBaicUrl = @"https://apic.douyucdn.cn/upload/";
+static NSString *const BADouyuImgMiddleSuffix = @"_middle.jpg";
+static NSString *const BADouyuImgBigSuffix = @"_big.jpg";
+static NSString *const BADouyuImgSmallSuffix = @"_small.jpg";
+
+//字符串
+#define BAStringWithInteger(integer) [NSString stringWithFormat:@"%zd", integer]
+#define BAStringWithFloat(float) [NSString stringWithFormat:@"%f", float]
+
+//占位图
+#define BAPlaceHolderImg nil
+
+//keyWindow
+#define BAKeyWindow [UIApplication sharedApplication].keyWindow
+
+//防止循环引用
+#define WeakObj(obj) __weak typeof(obj) obj##Weak = obj
+
+//通知中心
+#define BANotificationCenter [NSNotificationCenter defaultCenter]
+
+//获取temp
+#define BAPathTemp NSTemporaryDirectory()
+
+//获取沙盒 Document
+#define BAPathDocument [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]
+#define BAReportDatabase @"report.db"
+
+//获取沙盒 Cache
+#define BAPathCache [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
+
+//log
+#ifdef DEBUG
+#define NSLog(format, ...) printf("\n[%s] %s [第%d行] %s\n", __TIME__, __FUNCTION__, __LINE__, [[NSString stringWithFormat:format, ## __VA_ARGS__] UTF8String]);
+#else
+#define NSLog(format, ...)
+#endif
+
+#endif /* PrefixHeader_pch */
